@@ -39,19 +39,47 @@ def update_setting(update_setting_dict, update_setting_tuple):
 
 ## Function for deleteting user settings
 def delete_setting(delete_setting_dict, delete_setting_tuple):
-    pass
+    
+    ## Convert the key and value to lowercase
+    key = delete_setting_tuple
+    delete_setting_key = str(key).lower()
+    
+    ## Check if the key already exists, and delete it 
+    if delete_setting_key in delete_setting_dict: 
+        del delete_setting_dict[delete_setting_key]
+        return f"Setting {delete_setting_key} deleted successfully!"
+    else:
+        ## Check if the key doesn'
+        return "Setting not found!"
 
 ## Function for viewing user settings
-def view_setting(view_setting_dict, view_setting_tuple):
-    pass
+def view_settings(view_settings_dict):
+    
+    ## Return No settings available. if the given dictionary of settings is empty.
+    if not view_settings_dict:
+        return "No settings available."
+
+    ## If the dictionary contains any settings, return a string displaying the settings. 
+    if view_settings_dict:
+        current_settings = "Current User Settings:\n"
+        for key, value in view_settings_dict.items():
+            current_settings += f"{key}: {value}\n"
+        return current_settings
 
 
 ## Test dictionary
+## Update testing logic with multiple scenarios
 test_dict = {
     "theme": "light",
     "volume": "high",
     "notifications": "enabled"
 }
 
+
 print(add_setting(test_dict, ("volume", "high")))
-print(update_setting(test_dict, ("notisdvsdfications", "sdsdvsd")))
+
+print(update_setting(test_dict, ("notifications", "enabled")))
+
+print(delete_setting(test_dict, "volume"))
+
+print(view_settings(test_dict))
