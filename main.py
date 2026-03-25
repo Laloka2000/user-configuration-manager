@@ -8,12 +8,12 @@ def add_setting(setting_dict, setting_tuple):
     
     ## Check if the key settings exists
     if key in setting_dict:
-        return f"Setting {key} already exists! Cannot add a new setting with this name."
+        return f"Setting '{key}' already exists! Cannot add a new setting with this name."
     
     ## Check if the key doesn't exists
     if key not in setting_dict:
         setting_dict[key] = value
-        return f"Setting {key} added with value {value} successfully!"
+        return f"Setting '{key}' added with value '{value}' successfully!"
     
     return key,value
 
@@ -29,11 +29,11 @@ def update_setting(update_setting_dict, update_setting_tuple):
     ## Check if the key already exists, and update its value
     if update_setting_key in update_setting_dict:
         update_setting_dict[update_setting_key] = update_setting_value
-        return f"Setting {key} updated to {value} successfully!"
+        return f"Setting '{key}' updated to '{value}' successfully!"
     
     ## Check if the key doesn't exists
     if update_setting_key not in update_setting_dict:
-        return f"Setting {update_setting_key} does not exist! Cannot update a non-existing setting."
+        return f"Setting '{update_setting_key}' does not exist! Cannot update a non-existing setting."
     
     return update_setting_key, update_setting_value
 
@@ -49,8 +49,10 @@ def delete_setting(delete_setting_dict, delete_setting_tuple):
         del delete_setting_dict[delete_setting_key]
         return f"Setting {delete_setting_key} deleted successfully!"
     else:
-        ## Check if the key doesn'
+        ## Check if the key doesn't exists
         return "Setting not found!"
+    
+    return delete_setting_key
 
 ## Function for viewing user settings
 def view_settings(view_settings_dict):
@@ -63,23 +65,20 @@ def view_settings(view_settings_dict):
     if view_settings_dict:
         current_settings = "Current User Settings:\n"
         for key, value in view_settings_dict.items():
-            current_settings += f"{key}: {value}\n"
+            current_settings += f"{key}: {value}\n".capitalize()
         return current_settings
 
 
 ## Test dictionary
 ## Update testing logic with multiple scenarios
-test_dict = {
-    "theme": "light",
+test_settings = {
+    "theme": "dark",
     "volume": "high",
     "notifications": "enabled"
 }
 
 
-print(add_setting(test_dict, ("volume", "high")))
-
-print(update_setting(test_dict, ("notifications", "enabled")))
-
-print(delete_setting(test_dict, "volume"))
-
-print(view_settings(test_dict))
+print(add_setting(test_settings, ("THEME", "dark")))
+print(update_setting(test_settings, ("volume", "high")))
+print(delete_setting(test_settings, "volume"))
+print(view_settings(test_settings))

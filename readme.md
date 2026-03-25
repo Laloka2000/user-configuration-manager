@@ -21,7 +21,7 @@ The manager consists of four core functions:
 3.  **`delete_setting(delete_setting_dict, delete_setting_tuple)`**
     - Removes a setting from the dictionary.
     - Returns: Success message or a "not found" notice.
-4.  **`view_settings(view_settings_dict, view_settings_tuple)`**
+4.  **`view_settings(view_settings_dict)`**
     - Displays all current settings in a readable format.
 
 ---
@@ -34,17 +34,18 @@ Simply include the functions in your Python script. No external dependencies are
 
 ```python
 # Initial testing dictionary
-user_config = {
-    "theme": "dark",
-    "language": "en"
+test_settings = {
+    "theme": "light",
+    "volume": "high",
+    "notifications": "enabled"
 }
 
 # Adding a new setting
-result = add_setting(user_config, ("FontSize", "LARGE"))
+result = add_setting(test_settings, ("THEME", "dark"))
 print(result) 
-# Output: Setting 'fontsize' added with value 'large' successfully!
+# Output: Setting 'theme' added with value 'dark' successfully!
 
 # Attempting to add an existing key
-result = add_setting(user_config, ("THEME", "light"))
+result = add_setting(test_settings, ("THEME", "dark"))
 print(result) 
 # Output: Setting 'theme' already exists! Cannot add a new setting with this name.
